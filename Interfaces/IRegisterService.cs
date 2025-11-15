@@ -4,6 +4,6 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Interfaces
 {
     internal interface IRegisterService
     {
-        Client Registrar(string login, string password, string phoneNumber);
+        Result<Client> Register(string login, string password, string phoneNumber, List<Client> clientsRegistered);
     }
 }
