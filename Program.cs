@@ -1,6 +1,6 @@
 ﻿using Fase5_CalculadoraDeDescontoComLogin.Services;
 using Unity;
-using Fase5_CalculadoraDeDescontoComLogin.Interfaces;
+using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
 
 namespace Fase5.Calculadora
 {
@@ -11,8 +11,10 @@ namespace Fase5.Calculadora
         {
             var container = RegisterDependencies(new UnityContainer());
 
-            var mainService = new MainService(container.Resolve<IRegisterService>());
-
+            var mainService = new MainService(
+                container.Resolve<IRegisterService>(),
+                container.Resolve<ILoginService>()
+                );
 
             while (true) {
                 Console.Clear();
@@ -23,7 +25,11 @@ namespace Fase5.Calculadora
                 {
                     case "1":
                         Console.Clear();
-                        mainService.Register();
+                        mainService.RegisterClient();
+                        break;
+                    case "2":
+                        Console.Clear();
+                        mainService.LoginClient();
                         break;
                 }
 
@@ -34,6 +40,8 @@ namespace Fase5.Calculadora
         public static UnityContainer RegisterDependencies(UnityContainer unityContainer)
         {
             unityContainer.RegisterType<IRegisterService, RegisterService>();
+            unityContainer.RegisterType<ILoginService, LoginService>();
+
             return unityContainer;
         }
     }
