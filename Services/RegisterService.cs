@@ -1,12 +1,12 @@
-﻿using Fase5_CalculadoraDeDescontoComLogin.Interfaces;
-using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
+﻿using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
+using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
     internal class RegisterService : IRegisterService
     {
         public RegisterService() { } 
-        public Result<Client> Register(string login, string password, string phoneNumber, List<Client> clientsRegistered)
+        public Result<Client> RegisterClient(string login, string password, string phoneNumber, List<Client> clientsRegistered)
         {
             //Aqui eu tentei validar alguns casos que eu acho que podem ser legais de avaliar no teste, mas acredito q tenha algum tipo de padrão
             //de conferência, até mesmo usando DataAnottations nas models.
@@ -40,14 +40,16 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"A senha precisa ser igual ou maior a 8 dígitos");
             }
 
-            foreach (var clientRegistered in clientsRegistered) {
-            
-                if (login == clientRegistered.Login)
-                {
-                    errors.Add($"O login {login} já existe!");
+            if (clientsRegistered != null)
+            {
+                foreach (var clientRegistered in clientsRegistered) {
+                    if (login == clientRegistered.Login)
+                    {
+                        errors.Add($"O login {login} já existe!");
+                    }
                 }
             }
-
+            
             if (errors.Count > 0) return Result<Client>.Fail(errors.ToArray());
 
 
@@ -58,7 +60,6 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     Password = password,
                     PhoneNumber = phoneNumber,
                     Role = role,
-                    IsLogged = false
             };
 
             return Result<Client>.Ok(newClient);

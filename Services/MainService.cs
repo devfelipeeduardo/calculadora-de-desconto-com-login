@@ -1,16 +1,18 @@
-﻿using Fase5_CalculadoraDeDescontoComLogin.Interfaces;
-using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
+﻿using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
+using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
     internal class MainService
     {
         private static IRegisterService _registerService;
-        public static List<Client> clientsRegistered = new List<Client>();
+        private static ILoginService _loginService;
+        public static List<Client> clientsRegistered;
         public static Client clientLogged;
 
-        public MainService(IRegisterService registerService) {
+        public MainService(IRegisterService registerService, ILoginService loginService) {
             _registerService = registerService;
+            _loginService = loginService;
         }
 
         public static void ShowMenu()
@@ -26,9 +28,8 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine("----------------------------");
         }
 
-        public void Register()
+        public void RegisterClient()
         {
-            //TODO: Preciso corrigir os nulos depois.
             Console.WriteLine("Digite o login:");
             string login = Console.ReadLine().ToLower();
             Console.WriteLine("Digite a senha:");
@@ -36,8 +37,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine("Digite o telefone:");
             string phoneNumber = Console.ReadLine();
 
-            var registerResult = _registerService.Register(login, password, phoneNumber, clientsRegistered);
-
+            var registerResult = _registerService.RegisterClient(login, password, phoneNumber, clientsRegistered);
 
             if (!registerResult.Success)
             {
@@ -50,9 +50,45 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     return;
                 }
             }
+
+            if (clientsRegistered == null )
+            {
+                clientsRegistered = new List<Client> { };
+            }
+
             clientsRegistered.Add(registerResult.Data);
             Console.Clear();
             Console.WriteLine($"Usuário {registerResult.Data.Login} registrado com sucesso!");
+            Thread.Sleep(3000);
+        }
+
+        public void LoginClient()
+        {
+            Console.WriteLine("Digite o login:");
+            string login = Console.ReadLine().ToLower();
+            Console.WriteLine("Digite a senha:");
+            string password = Console.ReadLine();
+            Console.WriteLine("Digite o telefone:");
+
+            var loginResult = _loginService.LoginClient(login, password, clientLogged, clientsRegistered);
+
+            if (!loginResult.Success)
+            {
+                Console.WriteLine("Erro no registro: ");
+
+                foreach (var error in loginResult.Errors)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Erro: {error}");
+                    Thread.Sleep(2000);
+                    return;
+                }
+            }
+
+            clientLogged = loginResult.Data;
+
+            Console.Clear();
+            Console.WriteLine($"Usuário {loginResult.Data.Login} logado com sucesso!");
             Thread.Sleep(3000);
         }
     }
