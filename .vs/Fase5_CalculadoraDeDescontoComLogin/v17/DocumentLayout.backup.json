@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|c:\\users\\felipeeduardodefreit\\source\\repos\\fase5_calculadoradedescontocomlogin\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|c:\\users\\felipeeduardodefreit\\source\\repos\\fase5_calculadoradedescontocomlogin\\services\\mainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|solutionrelative:services\\mainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|c:\\users\\felipeeduardodefreit\\source\\repos\\fase5_calculadoradedescontocomlogin\\services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,6 +19,18 @@
       "RelativeMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|solutionrelative:models\\entities\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|c:\\users\\felipeeduardodefreit\\source\\repos\\fase5_calculadoradedescontocomlogin\\interfaces\\iregisterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|solutionrelative:interfaces\\iregisterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|c:\\users\\felipeeduardodefreit\\source\\repos\\fase5_calculadoradedescontocomlogin\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|c:\\users\\felipeeduardodefreit\\source\\repos\\fase5_calculadoradedescontocomlogin\\models\\entities\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|solutionrelative:models\\entities\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|c:\\users\\felipeeduardodefreit\\source\\repos\\fase5_calculadoradedescontocomlogin\\models\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CFA3315-E4A4-454F-AFCC-5596EA0C4249}|Fase5_CalculadoraDeDescontoComLogin.csproj|solutionrelative:models\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -29,46 +41,47 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 180,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 234,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Client.cs",
-              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Models\\Entities\\Client.cs",
-              "RelativeDocumentMoniker": "Models\\Entities\\Client.cs",
-              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Models\\Entities\\Client.cs",
-              "RelativeToolTip": "Models\\Entities\\Client.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAGAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAwBYAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T20:11:59.603Z",
+              "WhenOpened": "2025-11-15T18:50:00.964Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "IRegisterService.cs",
+              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Interfaces\\IRegisterService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IRegisterService.cs",
+              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Interfaces\\IRegisterService.cs",
+              "RelativeToolTip": "Interfaces\\IRegisterService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T19:44:59.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Models\\Entities\\Product.cs",
               "RelativeDocumentMoniker": "Models\\Entities\\Product.cs",
               "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Models\\Entities\\Product.cs",
               "RelativeToolTip": "Models\\Entities\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T20:11:56.949Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RegisterService.cs",
-              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Services\\RegisterService.cs",
-              "RelativeDocumentMoniker": "Services\\RegisterService.cs",
-              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Services\\RegisterService.cs",
-              "RelativeToolTip": "Services\\RegisterService.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAYwBsAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T20:11:54.499Z",
+              "WhenOpened": "2025-11-15T19:20:34.239Z",
               "EditorCaption": ""
             },
             {
@@ -81,20 +94,59 @@
               "RelativeToolTip": "Services\\LoginService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:55:57.617Z",
+              "WhenOpened": "2025-11-15T19:12:42.315Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Models\\Entities\\Client.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\Client.cs",
+              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Models\\Entities\\Client.cs",
+              "RelativeToolTip": "Models\\Entities\\Client.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAYwAkAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T19:19:27.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegisterService.cs",
+              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Services\\RegisterService.cs",
+              "RelativeDocumentMoniker": "Services\\RegisterService.cs",
+              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Services\\RegisterService.cs",
+              "RelativeToolTip": "Services\\RegisterService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T19:08:48.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Result.cs",
+              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Models\\Entities\\Result.cs",
+              "RelativeDocumentMoniker": "Models\\Entities\\Result.cs",
+              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Models\\Entities\\Result.cs",
+              "RelativeToolTip": "Models\\Entities\\Result.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T19:11:14.431Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAYwBgAAAA0AAAAAAAAAA==",
+              "Title": "MainService.cs",
+              "DocumentMoniker": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Services\\MainService.cs",
+              "RelativeDocumentMoniker": "Services\\MainService.cs",
+              "ToolTip": "C:\\Users\\FelipeEduardodeFreit\\source\\repos\\Fase5_CalculadoraDeDescontoComLogin\\Services\\MainService.cs",
+              "RelativeToolTip": "Services\\MainService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwCIAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:54:30.04Z",
+              "WhenOpened": "2025-11-15T18:08:28.93Z",
               "EditorCaption": ""
             }
           ]

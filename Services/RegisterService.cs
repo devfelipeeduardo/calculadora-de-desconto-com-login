@@ -5,48 +5,63 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
     internal class RegisterService : IRegisterService
     {
-
-        public RegisterService() {}   
-        public Client Registrar(string login, string password, string phoneNumber)
+        public RegisterService() { } 
+        public Result<Client> Register(string login, string password, string phoneNumber, List<Client> clientsRegistered)
         {
-                if (login == null || login.Length == 0)
-                {
-                    Console.WriteLine($"O login: {login} não pode ser nulo ou igual a 0.");
-                }
+            //Aqui eu tentei validar alguns casos que eu acho que podem ser legais de avaliar no teste, mas acredito q tenha algum tipo de padrão
+            //de conferência, até mesmo usando DataAnottations nas models.
+            var errors = new List<string>();
 
-                if (login.Length < 6)
-                {
-                    Console.WriteLine($"O login: {login} deve ser maior que 6 dígitos");
-                }
-
-                if (login.Length > 15)
-                {
-                    Console.WriteLine($"O login {login} não pode ter mais de 15 caracteres");
-                }
-
-                //Senha
-                if (password == null || password.Length == 0)
-                {
-                    Console.WriteLine($"A senha não pode ser nula ou igual a 0.");
-                }
-
-                if (password.Length < 8)
-                {
-                    Console.WriteLine($"A senha precisa ser igual ou maior a 8 dígitos");
-                }
-
-                Thread.Sleep(2000);
-                Console.Clear();
-
-                string role = "usuario";
-
-                Client newUser = new Client { Login = login,
-                                                Password = password,
-                                                PhoneNumber = phoneNumber,
-                                                Role = role
-                };
-
-                return newUser;
+            //Login
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                errors.Add($"O login: {login} não pode ser nulo ou vazio.");
             }
+
+            if (login.Length < 6)
+            {
+                errors.Add($"O login: {login} deve ser maior que 6 dígitos");
+            }
+
+            if (login.Length > 15)
+            {
+                errors.Add($"O login {login} não pode ter mais de 15 caracteres");
+            }
+            if (errors.Count > 0) return Result<Client>.Fail(errors.ToArray());
+
+            //Senha
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                errors.Add($"A senha não pode ser nula ou igual a 0.");
+            }
+
+            if (password.Length < 8)
+            {
+                errors.Add($"A senha precisa ser igual ou maior a 8 dígitos");
+            }
+
+            foreach (var clientRegistered in clientsRegistered) {
+            
+                if (login == clientRegistered.Login)
+                {
+                    errors.Add($"O login {login} já existe!");
+                }
+            }
+
+            if (errors.Count > 0) return Result<Client>.Fail(errors.ToArray());
+
+
+            string role = "usuario";
+            var newClient = new Client
+                {
+                    Login = login,
+                    Password = password,
+                    PhoneNumber = phoneNumber,
+                    Role = role,
+                    IsLogged = false
+            };
+
+            return Result<Client>.Ok(newClient);
         }
     }
+}
