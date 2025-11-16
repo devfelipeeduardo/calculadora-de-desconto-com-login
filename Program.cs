@@ -1,5 +1,5 @@
-﻿using Fase5_CalculadoraDeDescontoComLogin.Services;
-using Unity;
+﻿using Unity;
+using Fase5_CalculadoraDeDescontoComLogin.Services;
 using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
 
 namespace Fase5.Calculadora
@@ -12,8 +12,9 @@ namespace Fase5.Calculadora
             var container = RegisterDependencies(new UnityContainer());
 
             var mainService = new MainService(
-                container.Resolve<IRegisterService>(),
-                container.Resolve<ILoginService>()
+                container.Resolve<IRegisterUserService>(),
+                container.Resolve<ILoginUserService>(),
+                container.Resolve<IRegisterClientService>()
                 );
 
             while (true) {
@@ -35,6 +36,18 @@ namespace Fase5.Calculadora
                         Console.Clear();
                         mainService.LogoutUser();
                         break;
+                    case "4":
+                        mainService.RegisterClient();
+                        Console.Clear();
+                        break;
+                    case "5":
+                        mainService.ShowClients();
+                        Console.Clear();
+                        break;
+                    case "6":
+                        mainService.ShowClients();
+                        Console.Clear();
+                        break;
                 }
 
             }
@@ -43,8 +56,9 @@ namespace Fase5.Calculadora
         //Pedro me ensinou a registrar as classes que herdam das services para facilitar testes.
         public static UnityContainer RegisterDependencies(UnityContainer unityContainer)
         {
-            unityContainer.RegisterType<IRegisterService, RegisterService>();
-            unityContainer.RegisterType<ILoginService, LoginService>();
+            unityContainer.RegisterType<IRegisterUserService, RegisterUserService>();
+            unityContainer.RegisterType<ILoginUserService, LoginUserService>();
+            unityContainer.RegisterType<IRegisterClientService, RegisterClientService>();
 
             return unityContainer;
         }

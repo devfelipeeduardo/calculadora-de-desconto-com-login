@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,17 +9,22 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
 {
     internal class Client
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public List<Product> Products { get; set; } = new List<Product> {
 
-        new Product(1, "lápis", "lápis de escrever", "fabercastell", 1.50),
-        new Product(2, "caneta", "caneta esferográfica", "bic", 2.50)
-
-    };
+        new Product{
+            Name ="lápis",
+            Description = "lápis de escrever",
+            Brand = "fabercastell",
+            Price = 1.50
+        }
+        
+        };
+        //new Product(2, "caneta", "caneta esferográfica", "bic", 2.50)
 
         public Client() { }
+
         public void ShowClientData()
         {
             Console.WriteLine($"Nome: {Name}\n" +
@@ -26,7 +32,20 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
             ShowClientProducts();
         }
 
-        public void ShowClientProducts()
+        public void IncludeProducts(string name, string description, string brand, double price) {
+
+            Product product = new Product
+            {
+                Name = "lápis",
+                Description = "lápis de escrever",
+                Brand = "fabercastell",
+                Price = 1.50
+            };
+
+            Products.Add( product );
+        }
+
+        private void ShowClientProducts()
         {
             foreach (Product product in Products)
             {

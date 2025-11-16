@@ -1,15 +1,17 @@
 ﻿using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
 using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
+using System.Data;
+using System.Net;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
-    internal class RegisterService : IRegisterService
+    internal class LoginUserService : ILoginUserService
     {
-        public RegisterService() { } 
-        public Result<User> RegisterUser(string login, string password, string phoneNumber, List<User> usersRegistered)
+        public LoginUserService() { }
+
+        public Result<User> LoginUser(string login, string password, User userLogged, List<User> usersRegistered)
         {
-            //Aqui eu tentei validar alguns casos que eu acho que podem ser legais de avaliar no teste, mas acredito q tenha algum tipo de padrão
-            //de conferência, até mesmo usando DataAnottations nas models.
             var errors = new List<string>();
 
             //Login
@@ -29,6 +31,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             }
             if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
+
             //Senha
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -40,29 +43,37 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"A senha precisa ser igual ou maior a 8 dígitos");
             }
 
-            if (usersRegistered != null)
-            {
-                foreach (var userRegistered in usersRegistered) {
-                    if (login == userRegistered.Login)
-                    {
-                        errors.Add($"O login {login} já existe!");
-                    }
+            if (userLogged != null) { 
+                if (login == userLogged.Login)
+                {
+                    errors.Add($"O login {login} já está logado!");
                 }
             }
-            
+
+            if (usersRegistered == null)
+            {
+                errors.Add($"O login {login} ainda não foi registrado!");
+            }
+
+            if (usersRegistered != null) {
+                foreach (var userRegistered in usersRegistered) {
+                    if (login == userRegistered.Login && password == userRegistered.Password)
+                    {
+                        break;
+                    }
+                    errors.Add($"O login {login} e/ou senha estão incorretos.!");
+                }
+            }
+
             if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
-
-            string role = "usuario";
-            var newUser = new User
-                {
-                    Login = login,
-                    Password = password,
-                    PhoneNumber = phoneNumber,
-                    Role = role,
+            var user = new User
+            {
+                Login = login,
+                Password = password
             };
 
-            return Result<User>.Ok(newUser);
+            return Result<User>.Ok(user); ;
         }
     }
 }

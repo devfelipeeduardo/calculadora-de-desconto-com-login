@@ -4,16 +4,23 @@ using System.Threading;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
-    internal class MainService
+    internal class MainService : IMainService
     {
-        private static IRegisterService _registerService;
-        private static ILoginService _loginService;
-        public static List<User> usersRegistered;
-        public static User userLogged;
+        private static IRegisterUserService _registerUserService;
+        private static ILoginUserService _loginClientService;
+        private static IRegisterClientService _registerClientService;
 
-        public MainService(IRegisterService registerService, ILoginService loginService) {
-            _registerService = registerService;
-            _loginService = loginService;
+        private static List<User> usersRegistered;
+        private static User userLogged;
+
+        private static List<Client> clientsRegistered;
+
+        public MainService(IRegisterUserService registerUserService, ILoginUserService loginService,
+                           IRegisterClientService registerClientService)
+        {
+            _registerUserService = registerUserService;
+            _loginClientService = loginService;
+            _registerClientService = registerClientService;
         }
 
         public static void ShowMenu()
@@ -22,10 +29,11 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine(" [1] Registrar              ");
             Console.WriteLine(" [2] Login                  ");
             Console.WriteLine(" [3] Logout                 ");
-            Console.WriteLine(" [4] Incluir Produto        ");
-            Console.WriteLine(" [5] Excluir Produtos       ");
-            Console.WriteLine(" [6] Calcular Desconto      ");
-            Console.WriteLine(" [7] Relatório de Produtos  ");
+            Console.WriteLine(" [4] Cadastrar Cliente      ");
+            Console.WriteLine(" [5] Relatório Clientes     ");
+            Console.WriteLine(" [6] Incluir Produto        ");
+            Console.WriteLine(" [7] Excluir Produto        ");
+            Console.WriteLine(" [8] Calcular Desconto      ");
             Console.WriteLine("----------------------------");
         }
 
@@ -38,29 +46,30 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine("Digite o telefone:");
             string phoneNumber = Console.ReadLine();
 
-            var registerResult = _registerService.RegisterUser(login, password, phoneNumber, usersRegistered);
+            var registerResult = _registerUserService.RegisterUser(login, password, phoneNumber, usersRegistered);
 
             if (!registerResult.Success)
             {
-                Console.WriteLine("Erro no registro: ");
+                Console.WriteLine("Erro no registro do usuário: ");
 
-                foreach (var error in registerResult.Errors) {
+                foreach (var error in registerResult.Errors)
+                {
                     Console.Clear();
                     Console.WriteLine($"Erro: {error}");
-                    Thread.Sleep(2000);
+                    WaitUserToType();
                     return;
                 }
             }
 
-            if (usersRegistered == null )
+            if (usersRegistered == null)
             {
-                usersRegistered = new List<User> { };
+                usersRegistered = new List<User>();
             }
 
             usersRegistered.Add(registerResult.Data);
             Console.Clear();
             Console.WriteLine($"Usuário {registerResult.Data.Login} registrado com sucesso!");
-            Thread.Sleep(3000);
+            WaitUserToType();
         }
 
         public void LoginUser()
@@ -71,7 +80,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             string password = Console.ReadLine();
             Console.WriteLine("Digite o telefone:");
 
-            var loginResult = _loginService.LoginUser(login, password, userLogged, usersRegistered);
+            var loginResult = _loginClientService.LoginUser(login, password, userLogged, usersRegistered);
 
             if (!loginResult.Success)
             {
@@ -81,7 +90,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 {
                     Console.Clear();
                     Console.WriteLine($"Erro: {error}");
-                    Thread.Sleep(2000);
+                    WaitUserToType();
                     return;
                 }
             }
@@ -90,7 +99,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 
             Console.Clear();
             Console.WriteLine($"Usuário {loginResult.Data.Login} logado com sucesso!");
-            Thread.Sleep(3000);
+            WaitUserToType();
         }
 
         public void LogoutUser()
@@ -98,14 +107,119 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             if (userLogged == null)
             {
                 Console.WriteLine("Não existe nenhum usuário logado.");
-                Thread.Sleep(3000);
+                WaitUserToType();
                 return;
             }
 
             Console.WriteLine($"O usuário {userLogged.Login} foi deslogado!");
-            Thread.Sleep(3000);
+            WaitUserToType(); ;
 
             userLogged = null;
+        }
+
+        public void RegisterClient()
+        {
+
+            if (!isUserLogged())
+            {
+                Console.Clear();
+                Console.WriteLine($"Você precista estar logado para utilizar o sistema!");
+                WaitUserToType();
+                return;
+            }
+
+            Console.Clear();
+            Console.WriteLine("Digite o nome do cliente:");
+            string name = Console.ReadLine().ToLower();
+            Console.WriteLine("Digite o telefone do cliente:");
+            string phoneNumber = Console.ReadLine();
+
+            var registerResult = _registerClientService.RegisterClient(name, phoneNumber, clientsRegistered);
+
+            if (!registerResult.Success)
+            {
+                Console.WriteLine("Erro no registro do cliente: ");
+
+                foreach (var error in registerResult.Errors)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Erro: {error}");
+                    WaitUserToType();
+                    return;
+                }
+            }
+
+            if (clientsRegistered == null)
+            {
+                clientsRegistered = new List<Client>();
+            }
+
+            clientsRegistered.Add(registerResult.Data);
+            Console.Clear();
+            Console.WriteLine($"Cliente  {registerResult.Data.Name} registrado com sucesso!");
+            WaitUserToType();
+
+        }
+
+        public void ShowClients()
+        {
+            if (clientsRegistered == null)
+            {
+                Console.Clear();
+                Console.WriteLine("Não existe clientes registrados.");
+                WaitUserToType();
+                return;
+            }
+
+            Console.Clear();
+            Console.WriteLine("Clientes e Produtos:");
+            foreach (var client in clientsRegistered)
+            {
+                client.ShowClientData();
+            }
+            WaitUserToType();
+        }
+
+        public void IncludeProductsByClient()
+        {
+            Console.WriteLine("Digite o nome do cliente");
+            string clientName = Console.ReadLine();
+
+            foreach (var c in clientsRegistered)
+            {
+                if (c.Name == clientName)
+                {
+                    Console.WriteLine("Digite o nome do produto");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Digite a descrição do produto");
+                    string description = Console.ReadLine();
+
+                    Console.WriteLine("Digite a marca do produto");
+                    string brand = Console.ReadLine();
+
+                    Console.WriteLine("Digite o preço do produto");
+                    double price = double.Parse(Console.ReadLine());
+
+
+
+                    c.IncludeProducts();
+                }
+            }
+        }
+        public void WaitUserToType()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Aperte Enter para voltar ao menu!");
+            Console.ReadKey();
+        }
+
+        public bool isUserLogged()
+        {
+            if (userLogged == null)
+            {
+                return false;
+            }
+            else { return true; }
         }
     }
 }

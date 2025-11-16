@@ -1,17 +1,15 @@
 ﻿using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
 using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
-using System.Data;
-using System.Net;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
-    internal class LoginService : ILoginService
+    internal class RegisterUserService : IRegisterUserService
     {
-        public LoginService() { }
-
-        public Result<User> LoginUser(string login, string password, User userLogged, List<User> usersRegistered)
+        public RegisterUserService() { } 
+        public Result<User> RegisterUser(string login, string password, string phoneNumber, List<User> usersRegistered)
         {
+            //Aqui eu tentei validar alguns casos que eu acho que podem ser legais de avaliar no teste, mas acredito q tenha algum tipo de padrão
+            //de conferência, até mesmo usando DataAnottations nas models.
             var errors = new List<string>();
 
             //Login
@@ -31,7 +29,6 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             }
             if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
-
             //Senha
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -43,37 +40,36 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"A senha precisa ser igual ou maior a 8 dígitos");
             }
 
-            if (userLogged != null) { 
-                if (login == userLogged.Login)
-                {
-                    errors.Add($"O login {login} já está logado!");
-                }
-            }
-
-            if (usersRegistered == null)
+            //Telefone
+            
+            if (phoneNumber.Length != 11)
             {
-                errors.Add($"O login {login} ainda não foi registrado!");
+                errors.Add($"O telefone deve conter 11 números");
             }
 
-            if (usersRegistered != null) {
+            if (usersRegistered != null)
+            {
                 foreach (var userRegistered in usersRegistered) {
-                    if (login == userRegistered.Login && password == userRegistered.Password)
+                    if (login == userRegistered.Login)
                     {
-                        continue;
+                        errors.Add($"O login {login} já existe!");
                     }
-                    errors.Add($"O login {login} ainda não foi registrado!");
                 }
             }
-
+            
             if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
-            var user = new User
-            {
-                Login = login,
-                Password = password
+
+            string role = "usuario";
+            var newUser = new User
+                {
+                    Login = login,
+                    Password = password,
+                    PhoneNumber = phoneNumber,
+                    Role = role,
             };
 
-            return Result<User>.Ok(user); ;
+            return Result<User>.Ok(newUser);
         }
     }
 }
