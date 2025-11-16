@@ -9,7 +9,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         private static IRegisterUserService _registerUserService;
         private static ILoginUserService _loginClientService;
         private static IRegisterClientService _registerClientService;
-        private static IAddProductByClientService _addProductByClientService;
+        private static IProductByClientService _productByClientService;
 
         private static List<User> usersRegistered;
         private static User userLogged;
@@ -17,12 +17,12 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         private static List<Client> clientsRegistered;
 
         public MainService(IRegisterUserService registerUserService, ILoginUserService loginService,
-                           IRegisterClientService registerClientService, IAddProductByClientService addProductByClientService)
+                           IRegisterClientService registerClientService, IProductByClientService addProductByClientService)
         {
             _registerUserService = registerUserService;
             _loginClientService = loginService;
             _registerClientService = registerClientService;
-            _addProductByClientService = addProductByClientService;
+            _productByClientService = addProductByClientService;
 
 
         }
@@ -185,8 +185,16 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             WaitUserToType();
         }
         //[6]
-        public void IncludeProductsByClient()
+        public void AddProductsByClient()
         {
+            if (clientsRegistered == null)
+            {
+                Console.Clear();
+                Console.WriteLine("Não existe clientes registrados para adicionar produtos.");
+                WaitUserToType();
+                return;
+            }
+
             Console.WriteLine("Digite o nome do cliente");
             string clientName = Console.ReadLine();
 
@@ -194,6 +202,9 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             {
                 if (c.Name == clientName)
                 {
+                    c.ShowClientData();
+                    Console.WriteLine();
+
                     Console.WriteLine("Digite o nome do produto");
                     string name = Console.ReadLine();
                     Console.WriteLine("Digite a descrição do produto");
@@ -205,13 +216,53 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     Console.WriteLine("Digite o preço do produto");
                     double price = double.Parse(Console.ReadLine());
 
-                    var newProduct = 
+                    var newProduct = _productByClientService.AddProducts(name, description, brand, price, clientsRegistered, c.Products);
 
-                    c.IncludeProducts();
+                    c.AddProducts(newProduct.Data);
+                    Console.WriteLine($"Produto adicionado com sucesso no cliente {clientName}!");
+                    WaitUserToType();
+                    return;
                 }
             }
+            Console.WriteLine($"O cliente {clientName} não foi encontrado.");
+            WaitUserToType();
         }
 
+        //[7] //TODO: refatorar pq tem dependências erradas.
+        public void DeleteProductByClient()
+        {
+            if (clientsRegistered == null)
+            {
+                Console.Clear();
+                Console.WriteLine("Não existe clientes registrados para deletar produtos.");
+                WaitUserToType();
+                return;
+            }
+
+            Console.WriteLine("Digite o nome do cliente");
+            string clientName = Console.ReadLine();
+
+            foreach (var c in clientsRegistered)
+            {
+                if (c.Name == clientName)
+                {
+                    c.ShowClientData();
+                    Console.WriteLine();
+
+                    Console.WriteLine("Digite o nome do produto");
+                    string name = Console.ReadLine();
+
+                    var productTested = _productByClientService.IsProductOk(name);
+
+                    c.DeleteProducts(productTested.Data.Name);
+                    Console.WriteLine($"Produto excluído com sucesso no cliente {clientName}!");
+                    WaitUserToType();
+                    return;
+                }
+            }
+            Console.WriteLine($"O cliente {clientName} não foi encontrado.");
+            WaitUserToType();
+        }
 
         //Utilitários
         public void WaitUserToType()

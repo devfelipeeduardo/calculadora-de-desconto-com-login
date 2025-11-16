@@ -14,12 +14,12 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
         public List<Product> Products { get; set; } = new List<Product> {
 
             //Teste
-            new Product{
-                Name ="lápis",
-                Description = "lápis de escrever",
-                Brand = "fabercastell",
-                Price = 1.50
-            }
+            //new Product{
+            //    Name ="lápis",
+            //    Description = "lápis de escrever",
+            //    Brand = "fabercastell",
+            //    Price = 1.50
+            //}
         
         };
 
@@ -32,21 +32,28 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
             ShowClientProducts();
         }
 
-        public void IncludeProducts(string name, string description, string brand, double price) {
+        public void AddProducts(Product product) {
 
-            Product product = new Product
-            {
-                Name = "lápis",
-                Description = "lápis de escrever",
-                Brand = "fabercastell",
-                Price = 1.50
-            };
+            Products.Add(product);
+        }
 
-            Products.Add( product );
+        public void DeleteProducts(string productName)
+        {
+            foreach (Product product in Products) {
+                if (productName == product.Name) {
+                    Products.Remove(product);
+                }
+            }
         }
 
         private void ShowClientProducts()
         {
+            if (Products == null )
+            {
+                Console.WriteLine("Cliente ainda não tem produtos.");
+                return;
+            }
+
             foreach (Product product in Products)
             {
                 var stringProduto = product.ToString();

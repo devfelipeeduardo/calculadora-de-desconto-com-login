@@ -15,7 +15,7 @@ namespace Fase5.Calculadora
                 container.Resolve<IRegisterUserService>(),
                 container.Resolve<ILoginUserService>(),
                 container.Resolve<IRegisterClientService>(),
-                container.Resolve<IAddProductByClientService>()
+                container.Resolve<IProductByClientService>()
                 );
 
             while (true) {
@@ -46,7 +46,11 @@ namespace Fase5.Calculadora
                         Console.Clear();
                         break;
                     case "6":
-                        mainService.ShowClients();
+                        mainService.AddProductsByClient();
+                        Console.Clear();
+                        break;
+                    case "7":
+                        mainService.DeleteProductByClient();
                         Console.Clear();
                         break;
                 }
@@ -60,7 +64,7 @@ namespace Fase5.Calculadora
             unityContainer.RegisterType<IRegisterUserService, RegisterUserService>();
             unityContainer.RegisterType<ILoginUserService, LoginUserService>();
             unityContainer.RegisterType<IRegisterClientService, RegisterClientService>();
-            unityContainer.RegisterType<IAddProductByClientService, AddProductByClientService>();
+            unityContainer.RegisterType<IProductByClientService, ProductByClientService>();
 
             return unityContainer;
         }

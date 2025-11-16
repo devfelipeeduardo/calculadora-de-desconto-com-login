@@ -41,7 +41,6 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             }
 
             //Telefone
-            
             if (phoneNumber.Length != 11)
             {
                 errors.Add($"O telefone deve conter 11 números");
