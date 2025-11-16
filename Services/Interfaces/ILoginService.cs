@@ -9,6 +9,6 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces
 {
     internal interface ILoginService
     {
-        Result<Client> LoginClient(string login, string password, Client clientLogged, List<Client> clientsRegistered);
+        Result<User> LoginUser(string login, string password, User userLogged, List<User> usersRegistered);
     }
 }
