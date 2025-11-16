@@ -13,7 +13,7 @@ namespace Fase5.Calculadora
 
             var mainService = new MainService(
                 container.Resolve<IRegisterService>(),
-                container.Resolve<ILoginService>()
+                container.Resolve<ILoginService>(),
                 );
 
             while (true) {
@@ -30,6 +30,10 @@ namespace Fase5.Calculadora
                     case "2":
                         Console.Clear();
                         mainService.LoginClient();
+                        break;
+                    case "3":
+                        Console.Clear();
+                        mainService.LogoutClient();
                         break;
                 }
 
