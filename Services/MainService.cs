@@ -9,6 +9,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         private static IRegisterUserService _registerUserService;
         private static ILoginUserService _loginClientService;
         private static IRegisterClientService _registerClientService;
+        private static IAddProductByClientService _addProductByClientService;
 
         private static List<User> usersRegistered;
         private static User userLogged;
@@ -16,11 +17,14 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         private static List<Client> clientsRegistered;
 
         public MainService(IRegisterUserService registerUserService, ILoginUserService loginService,
-                           IRegisterClientService registerClientService)
+                           IRegisterClientService registerClientService, IAddProductByClientService addProductByClientService)
         {
             _registerUserService = registerUserService;
             _loginClientService = loginService;
             _registerClientService = registerClientService;
+            _addProductByClientService = addProductByClientService;
+
+
         }
 
         public static void ShowMenu()
@@ -37,6 +41,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine("----------------------------");
         }
 
+        //[1]
         public void RegisterUser()
         {
             Console.WriteLine("Digite o login:");
@@ -71,7 +76,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine($"Usuário {registerResult.Data.Login} registrado com sucesso!");
             WaitUserToType();
         }
-
+        //[2]
         public void LoginUser()
         {
             Console.WriteLine("Digite o login:");
@@ -101,7 +106,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine($"Usuário {loginResult.Data.Login} logado com sucesso!");
             WaitUserToType();
         }
-
+        //[3]
         public void LogoutUser()
         {
             if (userLogged == null)
@@ -116,11 +121,11 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 
             userLogged = null;
         }
-
+        //[4]
         public void RegisterClient()
         {
 
-            if (!isUserLogged())
+            if (!IsUserLogged())
             {
                 Console.Clear();
                 Console.WriteLine($"Você precista estar logado para utilizar o sistema!");
@@ -160,7 +165,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             WaitUserToType();
 
         }
-
+        //[5]
         public void ShowClients()
         {
             if (clientsRegistered == null)
@@ -179,7 +184,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             }
             WaitUserToType();
         }
-
+        //[6]
         public void IncludeProductsByClient()
         {
             Console.WriteLine("Digite o nome do cliente");
@@ -200,12 +205,15 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     Console.WriteLine("Digite o preço do produto");
                     double price = double.Parse(Console.ReadLine());
 
-
+                    var newProduct = 
 
                     c.IncludeProducts();
                 }
             }
         }
+
+
+        //Utilitários
         public void WaitUserToType()
         {
             Console.WriteLine();
@@ -213,7 +221,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.ReadKey();
         }
 
-        public bool isUserLogged()
+        public bool IsUserLogged()
         {
             if (userLogged == null)
             {

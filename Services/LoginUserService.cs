@@ -17,17 +17,17 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             //Login
             if (string.IsNullOrWhiteSpace(login))
             {
-                errors.Add($"O login: {login} não pode ser nulo ou vazio.");
+                errors.Add($"O login não pode ser nulo ou vazio.");
             }
 
             if (login.Length < 6)
             {
-                errors.Add($"O login: {login} deve ser maior que 6 dígitos");
+                errors.Add($"O login deve ser maior que 6 dígitos");
             }
 
             if (login.Length > 15)
             {
-                errors.Add($"O login {login} não pode ter mais de 15 caracteres");
+                errors.Add($"O login não pode ter mais de 15 caracteres");
             }
             if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 

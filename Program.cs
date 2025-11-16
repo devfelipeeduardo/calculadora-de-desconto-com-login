@@ -14,7 +14,8 @@ namespace Fase5.Calculadora
             var mainService = new MainService(
                 container.Resolve<IRegisterUserService>(),
                 container.Resolve<ILoginUserService>(),
-                container.Resolve<IRegisterClientService>()
+                container.Resolve<IRegisterClientService>(),
+                container.Resolve<IAddProductByClientService>()
                 );
 
             while (true) {
@@ -59,6 +60,7 @@ namespace Fase5.Calculadora
             unityContainer.RegisterType<IRegisterUserService, RegisterUserService>();
             unityContainer.RegisterType<ILoginUserService, LoginUserService>();
             unityContainer.RegisterType<IRegisterClientService, RegisterClientService>();
+            unityContainer.RegisterType<IAddProductByClientService, AddProductByClientService>();
 
             return unityContainer;
         }

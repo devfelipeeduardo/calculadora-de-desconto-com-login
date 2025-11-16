@@ -21,12 +21,12 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             //Login
             if (string.IsNullOrWhiteSpace(name))
             {
-                errors.Add($"O cliente: {name} não pode ter o nome nulo ou vazio.");
+                errors.Add($"O cliente não pode ter o nome nulo ou vazio.");
             }
 
             if (name.Length > 15)
             {
-                errors.Add($"O nome {name} do cliente não pode ter mais de 15 caracteres");
+                errors.Add($"O nome do cliente não pode ter mais de 15 caracteres");
             }
 
             if (clientsRegistered != null)

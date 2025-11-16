@@ -13,15 +13,15 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
         public string PhoneNumber { get; set; }
         public List<Product> Products { get; set; } = new List<Product> {
 
-        new Product{
-            Name ="lápis",
-            Description = "lápis de escrever",
-            Brand = "fabercastell",
-            Price = 1.50
-        }
+            //Teste
+            new Product{
+                Name ="lápis",
+                Description = "lápis de escrever",
+                Brand = "fabercastell",
+                Price = 1.50
+            }
         
         };
-        //new Product(2, "caneta", "caneta esferográfica", "bic", 2.50)
 
         public Client() { }
 
