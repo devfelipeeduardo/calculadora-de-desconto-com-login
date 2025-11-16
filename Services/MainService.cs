@@ -1,5 +1,6 @@
 ﻿using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
 using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
+using System.Threading;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
@@ -7,12 +8,14 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
     {
         private static IRegisterService _registerService;
         private static ILoginService _loginService;
+        private static ILogoutService _logoutService;
         public static List<Client> clientsRegistered;
         public static Client clientLogged;
 
-        public MainService(IRegisterService registerService, ILoginService loginService) {
+        public MainService(IRegisterService registerService, ILoginService loginService, ILogoutService logoutService) {
             _registerService = registerService;
             _loginService = loginService;
+            _logoutService = logoutService;
         }
 
         public static void ShowMenu()
@@ -90,6 +93,21 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.Clear();
             Console.WriteLine($"Usuário {loginResult.Data.Login} logado com sucesso!");
             Thread.Sleep(3000);
+        }
+
+        public void LogoutClient()
+        {
+            if (clientLogged == null)
+            {
+                Console.WriteLine("Não existe nenhum cliente logado.");
+                Thread.Sleep(3000);
+                return;
+            }
+
+            Console.WriteLine($"O cliente {clientLogged.Login} foi deslogado!");
+            Thread.Sleep(3000);
+
+            clientLogged = null;
         }
     }
 }
