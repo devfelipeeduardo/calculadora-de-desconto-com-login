@@ -8,14 +8,12 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
     {
         private static IRegisterService _registerService;
         private static ILoginService _loginService;
-        private static ILogoutService _logoutService;
-        public static List<Client> clientsRegistered;
-        public static Client clientLogged;
+        public static List<User> usersRegistered;
+        public static User userLogged;
 
-        public MainService(IRegisterService registerService, ILoginService loginService, ILogoutService logoutService) {
+        public MainService(IRegisterService registerService, ILoginService loginService) {
             _registerService = registerService;
             _loginService = loginService;
-            _logoutService = logoutService;
         }
 
         public static void ShowMenu()
@@ -31,7 +29,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine("----------------------------");
         }
 
-        public void RegisterClient()
+        public void RegisterUser()
         {
             Console.WriteLine("Digite o login:");
             string login = Console.ReadLine().ToLower();
@@ -40,7 +38,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine("Digite o telefone:");
             string phoneNumber = Console.ReadLine();
 
-            var registerResult = _registerService.RegisterClient(login, password, phoneNumber, clientsRegistered);
+            var registerResult = _registerService.RegisterUser(login, password, phoneNumber, usersRegistered);
 
             if (!registerResult.Success)
             {
@@ -54,18 +52,18 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 }
             }
 
-            if (clientsRegistered == null )
+            if (usersRegistered == null )
             {
-                clientsRegistered = new List<Client> { };
+                usersRegistered = new List<User> { };
             }
 
-            clientsRegistered.Add(registerResult.Data);
+            usersRegistered.Add(registerResult.Data);
             Console.Clear();
             Console.WriteLine($"Usuário {registerResult.Data.Login} registrado com sucesso!");
             Thread.Sleep(3000);
         }
 
-        public void LoginClient()
+        public void LoginUser()
         {
             Console.WriteLine("Digite o login:");
             string login = Console.ReadLine().ToLower();
@@ -73,7 +71,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             string password = Console.ReadLine();
             Console.WriteLine("Digite o telefone:");
 
-            var loginResult = _loginService.LoginClient(login, password, clientLogged, clientsRegistered);
+            var loginResult = _loginService.LoginUser(login, password, userLogged, usersRegistered);
 
             if (!loginResult.Success)
             {
@@ -88,26 +86,26 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 }
             }
 
-            clientLogged = loginResult.Data;
+            userLogged = loginResult.Data;
 
             Console.Clear();
             Console.WriteLine($"Usuário {loginResult.Data.Login} logado com sucesso!");
             Thread.Sleep(3000);
         }
 
-        public void LogoutClient()
+        public void LogoutUser()
         {
-            if (clientLogged == null)
+            if (userLogged == null)
             {
-                Console.WriteLine("Não existe nenhum cliente logado.");
+                Console.WriteLine("Não existe nenhum usuário logado.");
                 Thread.Sleep(3000);
                 return;
             }
 
-            Console.WriteLine($"O cliente {clientLogged.Login} foi deslogado!");
+            Console.WriteLine($"O usuário {userLogged.Login} foi deslogado!");
             Thread.Sleep(3000);
 
-            clientLogged = null;
+            userLogged = null;
         }
     }
 }

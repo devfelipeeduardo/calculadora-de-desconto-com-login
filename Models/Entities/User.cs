@@ -1,6 +1,6 @@
 ﻿namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
 
-internal class Client
+internal class User
 {
     public int Id { get; set; }
     public string Login { get; set; } = string.Empty;
@@ -14,8 +14,8 @@ internal class Client
     
     };
 
-    public Client() { }
-    public void ShowClientData()
+    public User() { }
+    public void ShowUserData()
     {
         Console.WriteLine($"Login: {Login}\n" +
                           $"Acesso: {Role}\n" +

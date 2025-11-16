@@ -10,7 +10,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
     {
         public LoginService() { }
 
-        public Result<Client> LoginClient(string login, string password, Client clientLogged, List<Client> clientsRegistered)
+        public Result<User> LoginUser(string login, string password, User userLogged, List<User> usersRegistered)
         {
             var errors = new List<string>();
 
@@ -29,7 +29,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             {
                 errors.Add($"O login {login} não pode ter mais de 15 caracteres");
             }
-            if (errors.Count > 0) return Result<Client>.Fail(errors.ToArray());
+            if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
 
             //Senha
@@ -43,21 +43,21 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"A senha precisa ser igual ou maior a 8 dígitos");
             }
 
-            if (clientLogged != null) { 
-                if (login == clientLogged.Login)
+            if (userLogged != null) { 
+                if (login == userLogged.Login)
                 {
                     errors.Add($"O login {login} já está logado!");
                 }
             }
 
-            if (clientsRegistered == null)
+            if (usersRegistered == null)
             {
                 errors.Add($"O login {login} ainda não foi registrado!");
             }
 
-            if (clientsRegistered != null) {
-                foreach (var clientRegistered in clientsRegistered) {
-                    if (login == clientRegistered.Login && password == clientRegistered.Password)
+            if (usersRegistered != null) {
+                foreach (var userRegistered in usersRegistered) {
+                    if (login == userRegistered.Login && password == userRegistered.Password)
                     {
                         continue;
                     }
@@ -65,15 +65,15 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 }
             }
 
-            if (errors.Count > 0) return Result<Client>.Fail(errors.ToArray());
+            if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
-            var client = new Client
+            var user = new User
             {
                 Login = login,
                 Password = password
             };
 
-            return Result<Client>.Ok(client); ;
+            return Result<User>.Ok(user); ;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
     internal class RegisterService : IRegisterService
     {
         public RegisterService() { } 
-        public Result<Client> RegisterClient(string login, string password, string phoneNumber, List<Client> clientsRegistered)
+        public Result<User> RegisterUser(string login, string password, string phoneNumber, List<User> usersRegistered)
         {
             //Aqui eu tentei validar alguns casos que eu acho que podem ser legais de avaliar no teste, mas acredito q tenha algum tipo de padrão
             //de conferência, até mesmo usando DataAnottations nas models.
@@ -27,7 +27,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             {
                 errors.Add($"O login {login} não pode ter mais de 15 caracteres");
             }
-            if (errors.Count > 0) return Result<Client>.Fail(errors.ToArray());
+            if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
             //Senha
             if (string.IsNullOrWhiteSpace(password))
@@ -40,21 +40,21 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"A senha precisa ser igual ou maior a 8 dígitos");
             }
 
-            if (clientsRegistered != null)
+            if (usersRegistered != null)
             {
-                foreach (var clientRegistered in clientsRegistered) {
-                    if (login == clientRegistered.Login)
+                foreach (var userRegistered in usersRegistered) {
+                    if (login == userRegistered.Login)
                     {
                         errors.Add($"O login {login} já existe!");
                     }
                 }
             }
             
-            if (errors.Count > 0) return Result<Client>.Fail(errors.ToArray());
+            if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
 
             string role = "usuario";
-            var newClient = new Client
+            var newUser = new User
                 {
                     Login = login,
                     Password = password,
@@ -62,7 +62,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     Role = role,
             };
 
-            return Result<Client>.Ok(newClient);
+            return Result<User>.Ok(newUser);
         }
     }
 }
