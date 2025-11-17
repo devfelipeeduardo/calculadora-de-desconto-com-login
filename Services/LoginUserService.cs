@@ -56,15 +56,19 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"O login {login} ainda não foi registrado!");
             }
 
+            bool isLoginCorrect = false;
             if (usersRegistered != null)
             {
-                Console.WriteLine(usersRegistered.ToString());
-                foreach (var userRegistered in usersRegistered)
+                foreach (var u in usersRegistered)
                 {
-                    if (login == userRegistered.Login && password == userRegistered.Password)
+                    if (login == u.Login && password == u.Password)
                     {
+                        isLoginCorrect = true;
                         break;
                     }
+                }
+                if (isLoginCorrect)
+                {
                     errors.Add($"O login {login} e/ou senha estão incorretos.!");
                 }
             }
