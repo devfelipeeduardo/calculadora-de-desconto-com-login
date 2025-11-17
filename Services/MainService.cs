@@ -109,12 +109,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         //[3]
         public void LogoutUser()
         {
-            if (userLogged == null)
-            {
-                Console.WriteLine("Não existe nenhum usuário logado.");
-                WaitUserToType();
-                return;
-            }
+            if (!IsUserLogged()) return;
 
             Console.WriteLine($"O usuário {userLogged.Login} foi deslogado!");
             WaitUserToType(); ;
@@ -124,14 +119,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         //[4]
         public void RegisterClient()
         {
-
-            if (!IsUserLogged())
-            {
-                Console.Clear();
-                Console.WriteLine($"Você precista estar logado para utilizar o sistema!");
-                WaitUserToType();
-                return;
-            }
+            if (!IsUserLogged()) return;
 
             Console.Clear();
             Console.WriteLine("Digite o nome do cliente:");
@@ -168,13 +156,9 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         //[5]
         public void ShowClients()
         {
-            if (clientsRegistered == null)
-            {
-                Console.Clear();
-                Console.WriteLine("Não existe clientes registrados.");
-                WaitUserToType();
-                return;
-            }
+            if (!IsUserLogged()) return;
+
+            if (!IsClientRegistered()) return;
 
             Console.Clear();
             Console.WriteLine("Clientes e Produtos:");
@@ -187,13 +171,9 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         //[6]
         public void AddProductsByClient()
         {
-            if (clientsRegistered == null)
-            {
-                Console.Clear();
-                Console.WriteLine("Não existe clientes registrados para adicionar produtos.");
-                WaitUserToType();
-                return;
-            }
+            if (!IsUserLogged()) return;
+
+            if (!IsClientRegistered()) return;
 
             Console.WriteLine("Digite o nome do cliente");
             string clientName = Console.ReadLine();
@@ -244,13 +224,9 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         //[7]
         public void DeleteProductByClient()
         {
-            if (clientsRegistered == null)
-            {
-                Console.Clear();
-                Console.WriteLine("Não existe clientes registrados para deletar produtos.");
-                WaitUserToType();
-                return;
-            }
+            if (!IsUserLogged()) return;
+
+            if (!IsClientRegistered()) return;
 
             Console.WriteLine("Digite o nome do cliente");
             string clientName = Console.ReadLine().ToLower();
@@ -302,6 +278,21 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         {
             if (userLogged == null)
             {
+                Console.Clear();
+                Console.WriteLine($"Você precista estar logado para utilizar o sistema!");
+                WaitUserToType();
+                return false;
+            }
+            else { return true; }
+        }
+
+        public bool IsClientRegistered()
+        {
+            if (clientsRegistered == null)
+            {
+                Console.Clear();
+                Console.WriteLine("Não existe clientes registrados.");
+                WaitUserToType();
                 return false;
             }
             else { return true; }
