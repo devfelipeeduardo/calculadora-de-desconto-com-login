@@ -193,7 +193,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     string brand = Console.ReadLine();
 
                     Console.WriteLine("Digite o preço do produto");
-                    double price = double.Parse(Console.ReadLine());
+                    string price = (Console.ReadLine());
 
                     var newProductResult = _productByClientService.AddProducts(name, description, brand, price, clientsRegistered, c.Products);
 
@@ -265,12 +265,34 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             WaitUserToType();
         }
         //[8]
-        public void CalculateDiscountByClient()
+        public void CalculateTotalValueofProductsByClient()
         {
             if (!IsUserLogged()) return;
             if (!IsClientRegistered()) return;
 
+            Console.WriteLine("Digite o nome do cliente");
+            string clientName = Console.ReadLine();
 
+            foreach (var c in clientsRegistered)
+            {
+                if (c.Name == clientName)
+                {
+                    c.ShowClientData();
+                    Console.WriteLine();
+
+                    double totalValueOfProducts = c.ReturnTotalValueOfProducts();
+                    double discount = c.ReturnDiscountPercent();
+                    double totalValueCalculated =  c.CalculateTotalValueofProductsWithDiscount();
+
+                    Console.WriteLine($"O valor total dos produtos é: {totalValueOfProducts}");
+                    Console.WriteLine($"O valor total do desconto é: {discount}");
+                    Console.WriteLine($"O valor total dos produtos, com o desconto é: {totalValueCalculated}");
+                    WaitUserToType();
+                    return;
+                }
+            }
+            Console.WriteLine($"O cliente {clientName} não foi encontrado.");
+            WaitUserToType();
         }
 
         //Utilitários

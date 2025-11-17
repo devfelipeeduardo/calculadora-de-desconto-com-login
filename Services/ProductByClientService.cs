@@ -6,24 +6,30 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
     internal class ProductByClientService : IProductByClientService
     {
-        public Result<Product> AddProducts(string name, string description, string brand, double price,
+        public Result<Product> AddProducts(string name, string description, string brand, string price,
                                            List<Client> clientsRegistered, List<Product> productsRegistered)
         {
 
             var errors = new List<string>();
+            double priceParsed = new double();
+
+            try
+            {
+                priceParsed = Math.Round(double.Parse(price));
+            }
+            catch
+            {
+                errors.Add($"O preço precisa ser decimal.");
+            }
 
             //Nome
             if (string.IsNullOrWhiteSpace(name))
             {
                 errors.Add($"O nome do produto não pode ser nulo ou vazio.");
             }
-            if (name.Length < 6)
+            if (name.Length > 50)
             {
-                errors.Add($"O nome do produto deve ser maior que 6 dígitos");
-            }
-            if (name.Length > 15)
-            {
-                errors.Add($"O nome do produto não pode ter mais de 15 caracteres");
+                errors.Add($"O nome do produto não pode ter mais de 50 caracteres");
             }
 
             //Descrição
@@ -35,9 +41,9 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             {
                 errors.Add($"A descrição do produto deve ser maior que 6 dígitos");
             }
-            if (description.Length > 40)
+            if (description.Length > 100)
             {
-                errors.Add($"A descrição do produto não pode ter mais de 40 caracteres");
+                errors.Add($"A descrição do produto não pode ter mais de 100 caracteres");
             }
 
             //Marca
@@ -45,18 +51,15 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             {
                 errors.Add($"A marca do produto não pode ser nula ou vazia.");
             }
-            if (brand.Length < 6)
+
+            if (brand.Length > 100)
             {
-                errors.Add($"A marca do produto deve ser maior que 6 dígitos");
-            }
-            if (brand.Length > 15)
-            {
-                errors.Add($"A marca do produto não pode ter mais de 15 caracteres");
+                errors.Add($"A marca do produto não pode ter mais de 100 caracteres");
             }
 
             //Preço
 
-            if (price == 0.0)
+            if (priceParsed == 0.0)
             {
                 errors.Add($"O produto não pode ter o preço zerado.");
             }
@@ -79,7 +82,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 Name = name,
                 Description = description,
                 Brand = brand,
-                Price = price,
+                Price = priceParsed,
             };
 
             return Result<Product>.Ok(newProduct);
