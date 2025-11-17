@@ -112,10 +112,5 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 
             return Result<Product>.Ok(productTested);
         }
-
-        public void CalculateProductsDiscount()
-        {
-
-        }
     }
 }

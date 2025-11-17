@@ -38,5 +38,20 @@
                 Console.WriteLine(stringProduto);
             }
         }
+
+        private double ReturnDiscountPercent()
+        {
+            if (Products.Count == 2)
+            {
+                return 0.10;
+            }
+
+            else if (Products.Count > 2)
+            {
+                return 0.20;
+            }
+
+            return 0;
+        }
     }
 }
