@@ -18,8 +18,6 @@
             Products.Add(product);
         }
 
-
-
         public void DeleteProducts(string productName)
         {
             ShowClientProducts();
@@ -41,30 +39,30 @@
             }
         }
 
-        public double CalculateDiscount()
+        public double CalculateTotalValueofProductsWithDiscount()
         {
             double discountPercent = ReturnDiscountPercent();
             double totalValueOfProducts = ReturnTotalValueOfProducts();
 
-            return (1 - discountPercent) * totalValueOfProducts;
+            Console.WriteLine(discountPercent);
+            return discountPercent * totalValueOfProducts;
         }
 
-        private double ReturnTotalValueOfProducts()
+        public double ReturnTotalValueOfProducts()
         {
             if (Products.Count == 0) return 0;
 
             double total = 0;
-
             foreach (var p in Products) {
                 total += p.Price;
             }
             return total;
         }
 
-        private double ReturnDiscountPercent()
+        public double ReturnDiscountPercent()
         {
-            if (Products.Count == 2) return 0.10;
-            else if (Products.Count > 2) return 0.20;
+            if (Products.Count == 2) return 10/100;
+            else if (Products.Count > 2) return 20/100;
             else return 0;
         }
     }
