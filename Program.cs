@@ -18,7 +18,8 @@ namespace Fase5.Calculadora
                 container.Resolve<IProductByClientService>()
                 );
 
-            while (true) {
+            while (true)
+            {
                 Console.Clear();
                 MainService.ShowMenu();
                 string option = Console.ReadLine();
@@ -54,7 +55,6 @@ namespace Fase5.Calculadora
                         Console.Clear();
                         break;
                 }
-
             }
         }
 
@@ -65,7 +65,6 @@ namespace Fase5.Calculadora
             unityContainer.RegisterType<ILoginUserService, LoginUserService>();
             unityContainer.RegisterType<IRegisterClientService, RegisterClientService>();
             unityContainer.RegisterType<IProductByClientService, ProductByClientService>();
-
             return unityContainer;
         }
     }

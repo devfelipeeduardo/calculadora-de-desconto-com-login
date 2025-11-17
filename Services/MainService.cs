@@ -71,6 +71,13 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 usersRegistered = new List<User>();
             }
 
+            foreach (var user in usersRegistered) {
+                Console.WriteLine();
+                Console.WriteLine($"Login: {user.Login}");
+                Console.WriteLine($"Senha: {user.Password}");
+            }
+            Thread.Sleep(4000);
+
             usersRegistered.Add(registerResult.Data);
             Console.Clear();
             Console.WriteLine($"Usuário {registerResult.Data.Login} registrado com sucesso!");
@@ -216,9 +223,22 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     Console.WriteLine("Digite o preço do produto");
                     double price = double.Parse(Console.ReadLine());
 
-                    var newProduct = _productByClientService.AddProducts(name, description, brand, price, clientsRegistered, c.Products);
+                    var newProductResult = _productByClientService.AddProducts(name, description, brand, price, clientsRegistered, c.Products);
 
-                    c.AddProducts(newProduct.Data);
+                    if (!newProductResult.Success)
+                    {
+                        Console.WriteLine("Erro no registro do produto: ");
+
+                        foreach (var error in newProductResult.Errors)
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"Erro: {error}");
+                            WaitUserToType();
+                            return;
+                        }
+                    }
+
+                    c.AddProducts(newProductResult.Data);
                     Console.WriteLine($"Produto adicionado com sucesso no cliente {clientName}!");
                     WaitUserToType();
                     return;
@@ -253,6 +273,8 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     string name = Console.ReadLine();
 
                     var productTested = _productByClientService.IsProductOk(name);
+
+
 
                     c.DeleteProducts(productTested.Data.Name);
                     Console.WriteLine($"Produto excluído com sucesso no cliente {clientName}!");

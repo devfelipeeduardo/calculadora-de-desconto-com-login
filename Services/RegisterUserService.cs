@@ -5,7 +5,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
     internal class RegisterUserService : IRegisterUserService
     {
-        public RegisterUserService() { } 
+        public RegisterUserService() { }
         public Result<User> RegisterUser(string login, string password, string phoneNumber, List<User> usersRegistered)
         {
             //Aqui eu tentei validar alguns casos que eu acho que podem ser legais de avaliar no teste, mas acredito q tenha algum tipo de padrão
@@ -48,24 +48,25 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 
             if (usersRegistered != null)
             {
-                foreach (var userRegistered in usersRegistered) {
+                foreach (var userRegistered in usersRegistered)
+                {
                     if (login == userRegistered.Login)
                     {
                         errors.Add($"O login {login} já existe!");
                     }
                 }
             }
-            
+
             if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
 
 
             string role = "usuario";
             var newUser = new User
-                {
-                    Login = login,
-                    Password = password,
-                    PhoneNumber = phoneNumber,
-                    Role = role,
+            {
+                Login = login,
+                Password = password,
+                PhoneNumber = phoneNumber,
+                Role = role,
             };
 
             return Result<User>.Ok(newUser);

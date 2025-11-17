@@ -12,11 +12,11 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
     internal class RegisterClientService : IRegisterClientService
     {
-        public RegisterClientService () { }
+        public RegisterClientService() { }
 
-        public Result<Client> RegisterClient (string name, string phoneNumber, List<Client> clientsRegistered)
+        public Result<Client> RegisterClient(string name, string phoneNumber, List<Client> clientsRegistered)
         {
-            var errors = new List<string> ();
+            var errors = new List<string>();
 
             //Login
             if (string.IsNullOrWhiteSpace(name))
@@ -31,7 +31,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
 
             if (clientsRegistered != null)
             {
-                foreach (var clientRegistered  in clientsRegistered)
+                foreach (var clientRegistered in clientsRegistered)
                 {
                     if (name == clientRegistered.Name)
                     {

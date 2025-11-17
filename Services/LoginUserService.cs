@@ -43,7 +43,8 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"A senha precisa ser igual ou maior a 8 dígitos");
             }
 
-            if (userLogged != null) { 
+            if (userLogged != null)
+            {
                 if (login == userLogged.Login)
                 {
                     errors.Add($"O login {login} já está logado!");
@@ -55,8 +56,11 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"O login {login} ainda não foi registrado!");
             }
 
-            if (usersRegistered != null) {
-                foreach (var userRegistered in usersRegistered) {
+            if (usersRegistered != null)
+            {
+                Console.WriteLine(usersRegistered.ToString());
+                foreach (var userRegistered in usersRegistered)
+                {
                     if (login == userRegistered.Login && password == userRegistered.Password)
                     {
                         break;

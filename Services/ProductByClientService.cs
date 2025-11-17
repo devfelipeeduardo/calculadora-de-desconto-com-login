@@ -7,7 +7,8 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
     internal class ProductByClientService : IProductByClientService
     {
         public Result<Product> AddProducts(string name, string description, string brand, double price,
-                                           List<Client> clientsRegistered, List<Product> productsAdded) {
+                                           List<Client> clientsRegistered, List<Product> productsRegistered)
+        {
 
             var errors = new List<string>();
 
@@ -60,11 +61,14 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 errors.Add($"O produto não pode ter o preço zerado.");
             }
 
-            foreach (var p in productsAdded)
+            if (productsRegistered != null)
             {
-                if (name == p.Name)
+                foreach (var p in productsRegistered)
                 {
-                    errors.Add($"O produto {name} já existe.");
+                    if (name == p.Name)
+                    {
+                        errors.Add($"O produto {name} já existe.");
+                    }
                 }
             }
 
