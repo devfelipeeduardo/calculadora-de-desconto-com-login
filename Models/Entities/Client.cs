@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
+﻿namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
 {
     internal class Client
     {
@@ -27,13 +20,8 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
 
         public void DeleteProducts(string productName)
         {
-            foreach (Product product in Products)
-            {
-                if (productName == product.Name)
-                {
-                    Products.Remove(product);
-                }
-            }
+            ShowClientProducts();
+            Products.RemoveAll(p => p.Name.Contains(productName));
         }
 
         private void ShowClientProducts()

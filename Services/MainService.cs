@@ -71,13 +71,6 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                 usersRegistered = new List<User>();
             }
 
-            foreach (var user in usersRegistered) {
-                Console.WriteLine();
-                Console.WriteLine($"Login: {user.Login}");
-                Console.WriteLine($"Senha: {user.Password}");
-            }
-            Thread.Sleep(4000);
-
             usersRegistered.Add(registerResult.Data);
             Console.Clear();
             Console.WriteLine($"Usuário {registerResult.Data.Login} registrado com sucesso!");
@@ -248,7 +241,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             WaitUserToType();
         }
 
-        //[7] //TODO: refatorar pq tem dependências erradas.
+        //[7]
         public void DeleteProductByClient()
         {
             if (clientsRegistered == null)
@@ -260,7 +253,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             }
 
             Console.WriteLine("Digite o nome do cliente");
-            string clientName = Console.ReadLine();
+            string clientName = Console.ReadLine().ToLower();
 
             foreach (var c in clientsRegistered)
             {
@@ -270,14 +263,25 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     Console.WriteLine();
 
                     Console.WriteLine("Digite o nome do produto");
-                    string name = Console.ReadLine();
+                    string productName = Console.ReadLine().ToLower();
 
-                    var productTested = _productByClientService.IsProductOk(name);
+                    var productTested = _productByClientService.IsProductOk(productName);
 
+                    if (!productTested.Success)
+                    {
+                        Console.WriteLine("Erro ao excluir o produto: ");
 
+                        foreach (var error in productTested.Errors)
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"Erro: {error}");
+                            WaitUserToType();
+                            return;
+                        }
+                    }
 
                     c.DeleteProducts(productTested.Data.Name);
-                    Console.WriteLine($"Produto excluído com sucesso no cliente {clientName}!");
+                    Console.WriteLine($"Produto {productTested.Data.Name}  excluído com sucesso no cliente {clientName}!");
                     WaitUserToType();
                     return;
                 }
