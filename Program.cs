@@ -54,6 +54,10 @@ namespace Fase5.Calculadora
                         mainService.DeleteProductByClient();
                         Console.Clear();
                         break;
+                    case "8":
+                        mainService.CalculateDiscountByClient();
+                        Console.Clear();
+                        break;
                 }
             }
         }

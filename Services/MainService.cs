@@ -172,7 +172,6 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         public void AddProductsByClient()
         {
             if (!IsUserLogged()) return;
-
             if (!IsClientRegistered()) return;
 
             Console.WriteLine("Digite o nome do cliente");
@@ -211,7 +210,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                         }
                     }
 
-                    c.AddProducts(newProductResult.Data);
+                    c.AddProduct(newProductResult.Data);
                     Console.WriteLine($"Produto adicionado com sucesso no cliente {clientName}!");
                     WaitUserToType();
                     return;
@@ -264,6 +263,14 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             }
             Console.WriteLine($"O cliente {clientName} não foi encontrado.");
             WaitUserToType();
+        }
+        //[8]
+        public void CalculateDiscountByClient()
+        {
+            if (!IsUserLogged()) return;
+            if (!IsClientRegistered()) return;
+
+
         }
 
         //Utilitários
