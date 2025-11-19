@@ -1,16 +1,9 @@
 ﻿using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
 using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
-    internal class RegisterClientService : IRegisterClientService
+    public class RegisterClientService : IRegisterClientService
     {
         public RegisterClientService() { }
 

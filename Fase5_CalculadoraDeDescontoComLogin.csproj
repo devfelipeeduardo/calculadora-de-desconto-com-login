@@ -12,13 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Unity" Version="5.11.10" />
-    <PackageReference Include="Unity.Abstractions" Version="5.11.7" />
     <PackageReference Include="Unity.Container" Version="5.11.11" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Tests\" />
   </ItemGroup>
 
 </Project>

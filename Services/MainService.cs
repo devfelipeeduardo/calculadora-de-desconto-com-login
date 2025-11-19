@@ -1,10 +1,9 @@
 ﻿using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
 using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
-using System.Threading;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
-    internal class MainService : IMainService
+    public class MainService : IMainService
     {
         private static IRegisterUserService _registerUserService;
         private static ILoginUserService _loginClientService;
@@ -39,6 +38,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             Console.WriteLine(" [7] Excluir Produto        ");
             Console.WriteLine(" [8] Calcular Desconto      ");
             Console.WriteLine("----------------------------");
+            Console.Write("Digite uma opção: ");
         }
 
         //[1]
@@ -173,6 +173,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         {
             if (!IsUserLogged()) return;
             if (!IsClientRegistered()) return;
+            Console.Clear();
 
             Console.WriteLine("Digite o nome do cliente");
             string clientName = Console.ReadLine();
@@ -269,6 +270,7 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
         {
             if (!IsUserLogged()) return;
             if (!IsClientRegistered()) return;
+            Console.Clear();
 
             Console.WriteLine("Digite o nome do cliente");
             string clientName = Console.ReadLine();
@@ -284,9 +286,9 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
                     double discount = c.ReturnDiscountPercent();
                     double totalValueCalculated =  c.CalculateTotalValueofProductsWithDiscount();
 
-                    Console.WriteLine($"O valor total dos produtos é: {totalValueOfProducts}");
+                    Console.WriteLine($"O valor total dos produtos é: R$ {totalValueOfProducts}");
                     Console.WriteLine($"O valor total do desconto é: {discount}");
-                    Console.WriteLine($"O valor total dos produtos, com o desconto é: {totalValueCalculated}");
+                    Console.WriteLine($"O valor total dos produtos, com o desconto é: R$ {totalValueCalculated}");
                     WaitUserToType();
                     return;
                 }
@@ -326,5 +328,68 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             }
             else { return true; }
         }
+
+        public void WarnUserToTypeACorretOption()
+        {
+            Console.Clear();
+            Console.WriteLine("Digiteu uma opção válida! ");
+            Thread.Sleep(1000);
+        }
+
+        //For Tests
+
+        public void RegisterUserForTests(string login, string password, string phoneNumber)
+        {
+            var registerResult = _registerUserService.RegisterUser(login, password, phoneNumber, usersRegistered);
+
+            if (!registerResult.Success)
+            {
+                Console.WriteLine("Erro no registro do usuário: ");
+
+                foreach (var error in registerResult.Errors)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Erro: {error}");
+                    WaitUserToType();
+                    return;
+                }
+            }
+
+            if (usersRegistered == null)
+            {
+                usersRegistered = new List<User>();
+            }
+
+            usersRegistered.Add(registerResult.Data);
+            Console.Clear();
+            Console.WriteLine($"Usuário {registerResult.Data.Login} registrado com sucesso!");
+            WaitUserToType();
+        }
+
+        //[2]
+        public void LoginUserForTests(string login, string password)
+        {
+            var loginResult = _loginClientService.LoginUser(login, password, userLogged, usersRegistered);
+
+            if (!loginResult.Success)
+            {
+                Console.WriteLine("Erro no registro: ");
+
+                foreach (var error in loginResult.Errors)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Erro: {error}");
+                    WaitUserToType();
+                    return;
+                }
+            }
+
+            userLogged = loginResult.Data;
+
+            Console.Clear();
+            Console.WriteLine($"Usuário {loginResult.Data.Login} logado com sucesso!");
+            WaitUserToType();
+        }
+
     }
 }

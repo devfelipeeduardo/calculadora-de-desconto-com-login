@@ -3,7 +3,7 @@ using Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
-    internal class RegisterUserService : IRegisterUserService
+    public class RegisterUserService : IRegisterUserService
     {
         public RegisterUserService() { }
         public Result<User> RegisterUser(string login, string password, string phoneNumber, List<User> usersRegistered)
@@ -58,7 +58,6 @@ namespace Fase5_CalculadoraDeDescontoComLogin.Services
             }
 
             if (errors.Count > 0) return Result<User>.Fail(errors.ToArray());
-
 
             string role = "usuario";
             var newUser = new User

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Fase5_CalculadoraDeDescontoComLogin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80f4cd878971bcc339c55c8aad1be03765eacc49")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9d50ea60dbf245729f4c4475c44687a869cdc65")]
 [assembly: System.Reflection.AssemblyProductAttribute("Fase5_CalculadoraDeDescontoComLogin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Fase5_CalculadoraDeDescontoComLogin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

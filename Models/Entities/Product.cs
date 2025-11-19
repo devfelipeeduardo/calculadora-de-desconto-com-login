@@ -1,6 +1,6 @@
 ﻿namespace Fase5_CalculadoraDeDescontoComLogin.Models.Entities
 {
-    internal class Product
+    public class Product
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -11,7 +11,7 @@
 
         public override string ToString()
         {
-            return $"Name: {Name} | Description: {Description} | Brand: {Brand} | Price: {Price}";
+            return $"Nome: {Name} | Descrição: {Description} | Marca: {Brand} | Preço: R$ {Price}";
         }
     }
 }

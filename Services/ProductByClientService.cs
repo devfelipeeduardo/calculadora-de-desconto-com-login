@@ -4,20 +4,15 @@ using System.Diagnostics;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services
 {
-    internal class ProductByClientService : IProductByClientService
+    public class ProductByClientService : IProductByClientService
     {
         public Result<Product> AddProducts(string name, string description, string brand, string price,
                                            List<Client> clientsRegistered, List<Product> productsRegistered)
         {
 
             var errors = new List<string>();
-            double priceParsed = new double();
 
-            try
-            {
-                priceParsed = Math.Round(double.Parse(price));
-            }
-            catch
+            if (!double.TryParse(price, out double priceParsed))
             {
                 errors.Add($"O preço precisa ser decimal.");
             }

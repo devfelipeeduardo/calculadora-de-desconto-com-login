@@ -2,7 +2,7 @@
 {
     //Eu criei uma model chamada Result para lidar com os retornos. Eu já vi um pouco de Clean code, e sei que isso pode ser uma má prática
     //Mas eu não sabia como fazer isso de outra forma, se não criando mais um método, então deixei tudo aqui mesmo.
-    internal class Result<T>
+    public class Result<T>
     {
         public bool Success { get; set; }
         public T Data { get; set; }

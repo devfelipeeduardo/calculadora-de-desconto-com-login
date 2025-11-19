@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces
 {
-    internal interface IMainService
+    public interface IMainService
     {
         static IRegisterUserService _registerService;
         static ILoginUserService _loginService;

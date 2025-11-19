@@ -6,7 +6,6 @@ namespace Fase5.Calculadora
 {
     class Program
     {
-
         public static void Main(string[] args)
         {
             var container = RegisterDependencies(new UnityContainer());
@@ -56,6 +55,10 @@ namespace Fase5.Calculadora
                         break;
                     case "8":
                         mainService.CalculateTotalValueofProductsByClient();
+                        Console.Clear();
+                        break;
+                    default:
+                        mainService.WarnUserToTypeACorretOption();
                         Console.Clear();
                         break;
                 }

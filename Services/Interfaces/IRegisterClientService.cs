@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces
 {
-    internal interface IRegisterClientService
+    public interface IRegisterClientService
     {
         public Result<Client> RegisterClient(string name, string phoneNumber, List<Client> clientsRegistered);
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces
 {
-    internal interface IProductByClientService
+    public interface IProductByClientService
     {
         Result<Product> AddProducts(string name, string description, string brand, string price,
                                     List<Client> clientsRegistered, List<Product> productsRegistered);
