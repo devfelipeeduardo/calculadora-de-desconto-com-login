@@ -1,0 +1,18 @@
+﻿using Fase5_CalculadoraDeDescontoComLogin.Models.Entities;
+using Fase5_CalculadoraDeDescontoComLogin.Models.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Fase5_CalculadoraDeDescontoComLogin.Services.Interfaces
+{
+    public interface IProductByClientService
+    {
+        Result<Product> AddProducts(string name, string description, string brand, string price,
+                                    List<Client> clientsRegistered, List<Product> productsRegistered);
+
+        Result<Product> IsProductOk(string name);
+    }
+}
