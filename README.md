@@ -60,7 +60,8 @@ Para rodar os testes, rode o seguinte comando
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-
+Vox Soluções Empresariais 
 ## Autores
 
 - [@devfelipeeduardo](https://github.com/devfelipeeduardo)
+
