@@ -3,7 +3,6 @@
 
 Um software de registro de clientes, produtos e cálculo de desconto.
 
-
 ## Stack utilizada
 
 **Front-end:** Console do C#
@@ -65,3 +64,4 @@ Vox Soluções Empresariais
 
 - [@devfelipeeduardo](https://github.com/devfelipeeduardo)
 
+//Revisão OK 29/11/2025
